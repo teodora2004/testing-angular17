@@ -1,0 +1,13 @@
+
+.listing-location::before {
+  content: url("/assets/location-pin.svg") / "";
+}
+section.listing a {
+  padding-left: 20px;
+  text-decoration: none;
+  color: var(--primary-color);
+}
+section.listing a::after {
+  content: "\203A";
+  margin-left: 5px;
+}

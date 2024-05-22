@@ -1,0 +1,38 @@
+<article class="flex justify-between flex-column m-5">
+  <div class="w-6/12 mx-2">
+    <section>
+      <h2 class="text-3xl font-bold mb-4">{{ housingLocation?.name }}</h2>
+      <p class="font-24 mb-4">{{ housingLocation?.city }}, {{ housingLocation?.state }}</p>
+    </section>
+    <section class="mb-2">
+      <h2 class="text-blue-600 text-xl font-bold mb-2">About this housing location</h2>
+      <ul>
+        <li class="font-14 list-none">Units available: {{ housingLocation?.availableUnits }}</li>
+        <li class="font-14 list-none">Does this location have wifi: {{ housingLocation?.wifi }}</li>
+        <li class="font-14 list-none">Does this location have laundry: {{ housingLocation?.laundry }}</li>
+      </ul>
+    </section>
+  </div>
+  <img
+    class="h-500px w-6/12 object-cover rounded-md mx-2"
+    [src]="housingLocation?.photo"
+    alt="Exterior photo of {{ housingLocation?.name }}"
+    crossorigin
+  />
+</article>
+
+<article class="m-5 w-2/5">
+  <h2 class="text-2xl font-bold text-blue-600 mb-3">Apply now to live here</h2>
+  <form [formGroup]="applyForm" (ngSubmit)="submitApplication()">
+    @for (control of formControlsConfig; track control.name) {
+      <label [for]="control.name" class="block text-gray-700 text-sm font-bold my-2">
+        {{ control.name | titlecase }}
+      </label>
+      <input [id]="control.name"
+             [class]="'my-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'"
+             [type]="control.name === 'email' ? 'email' : 'text'"
+             [formControlName]="control.name" />
+    }
+    <button type="submit" class="w-full mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Apply now</button>
+  </form>
+</article>

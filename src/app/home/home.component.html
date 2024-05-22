@@ -1,0 +1,19 @@
+<section class="w-full flex justify-center my-5">
+  <form (ngSubmit)="onFilter($event, filter.value)" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-56 flex justify-space-between align-center w-[45%]">
+    <input type="text" placeholder="Filter by city" type="text" #filter class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+    <button (click)="onFilter($event, filter.value)" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-5 rounded focus:outline-none focus:shadow-outline">Search</button>
+  </form>
+</section>
+
+@if(filteredLocationList.length) {
+  <section class="grid gap-[14px] mt-[50px] justify-around grid-cols-4 mx-10 my-5">
+    @for (location of filteredLocationList; track location.id) {
+      <app-housing-location [housingLocation]="location"></app-housing-location>
+    }
+  </section>
+} @else {
+  <section class="grid gap-[14px] mt-[50px] justify-around grid-cols-4 mx-10 my-5">
+    <h2 class="text-xl">No locations found.</h2>
+  </section>
+}
+

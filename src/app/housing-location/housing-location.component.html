@@ -1,0 +1,7 @@
+<section class="bg-gray-200 rounded-xl pb-5">
+  <img class="min-h-52 w-100 object-cover rounded-t-xl" [src]="housingLocation.photo"
+    alt="Exterior photo of {{ housingLocation.name }}" crossorigin />
+  <h2 class="p-5 whitespace-no-wrap overflow-hidden truncate">{{ housingLocation.name }}</h2>
+  <p class="p-5">{{ housingLocation.city }}, {{ housingLocation.state }}</p>
+  <a class="p-5 hover:text-indigo-400 active:text-indigo-600 " [routerLink]="['/details', housingLocation.id]">Learn More</a>
+</section>
