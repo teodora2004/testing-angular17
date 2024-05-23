@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { HousingLocationComponent } from '../housing-location/housing-location.component';
 import { HousingLocation } from '../housinglocation';
 import { CommonModule } from '@angular/common';
@@ -14,17 +14,15 @@ import { HousingService } from '../housing.service';
 export class HomeComponent {
   public filteredLocationList: HousingLocation[] = [];
   public housingLocationList!: HousingLocation[];
+  private loading = signal(true);
   private housingService: HousingService = inject(HousingService);
   constructor() {
     this.housingService
       .getAllHousingLocations()
       .then((housingLocationList: HousingLocation[]) => {
+        this.loading.set(false);
         this.housingLocationList = housingLocationList;
         this.filteredLocationList = housingLocationList;
-
-
-        console.log('here', this.filteredLocationList)
-
       })
       .catch(error => console.error('Error fetching housing locations:', error))
   }
@@ -43,5 +41,8 @@ export class HomeComponent {
   public onFilter(e: Event, text: string): void {
     this.filterResults(text);
     e?.preventDefault();
+  }
+  public isLoading(): boolean {
+    return this.loading();
   }
 }
